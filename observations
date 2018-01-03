@@ -1,0 +1,309 @@
+# Observations of the cube
+
+These strings are general observations for how the cube works
+
+## 1
+
+Any list of moves can be mirrored to return the cube to its native state.
+
+    F
+    D
+    U'
+    L'
+
+Can become
+    
+    F
+    D
+    U'
+    L'
+
+    L
+    U
+    D'
+    F'
+
+## 2
+
+Any rule that is mirrored in the way described in `# 2` can be considered as a context
+
+A context is something where other moves can take place
+
+    F
+     D
+      U
+     D'
+    F'
+
+Where `U` is in the context of `FD`, and the `D'F'` pops back out of that context (like a stack)
+
+This must not be confused with
+
+    F
+     D
+      F'
+       D'
+
+The last two moves here do not pop out of the context, rather, they also build context
+
+## 3
+
+The moves
+
+    L'
+    L'
+
+And
+    
+    L
+    L
+
+Are indistinguishable. Any two moves in consequtive order can be done in the same direction
+(clockwise or anti-clockwise)
+
+## 4
+
+Any move or sets of moves that negate each other can be removed
+
+This can be removed:
+
+    L
+    L'
+
+Also this:
+
+    D
+    L
+
+    L'
+    D'
+
+However, if mirrored groups of moves are used as context, then they cannot be removed without
+changing a move's context
+
+Here, `DL` and `L'D'` cannot be removed without changing the context of `U`
+
+    D
+     L
+      U
+     L'
+    D'
+
+## 5
+
+You may swap opposing moves to have an opposite effect on the cube
+
+Opposing moves are:
+
+    F | B
+    R | L
+    U | B
+
+For example
+
+    F
+     R
+      R
+       B
+      R'
+     R'
+    F'
+
+Can be swapped for
+
+    B
+     R
+      R
+       F
+      R'
+     R'
+    B'
+
+## 6
+
+A move made within a context can be negated by re-entering the context
+
+Like this:
+
+    F
+     U
+      D
+       R
+      D'
+     U'
+    F'
+
+    F
+     U
+      D
+       R'
+      D'
+     U'
+    F'
+
+
+And brings the cube back to its original state
+
+Since that brings the cube back to its original state, this set is now a context also, like
+
+    F
+     U
+      D
+       R
+      D'
+     U'
+    F'
+    
+     D
+    
+    F
+     U
+      D
+       R'
+      D'
+     U'
+    F'
+
+Due to observation `# 4`, this can now become, but you might also want to remove pairs before adding to the context
+
+    F
+     U
+      D
+       R
+      D
+       D
+      D'
+       R'
+      D'
+     U'
+    F'
+
+## 7
+
+A context that is the cube's opposite side can be removed
+
+    F
+     D
+      U
+     D'
+    F'
+    F
+     U'
+    F'
+
+Is the same as just:
+    
+    F
+     U
+    F'
+    F
+     U'
+    F'
+
+However, removing `L` and `L'` would change the context here:
+
+    L
+     D
+      R
+     D'
+    L'
+
+
+# A formal system with rules for dirivation
+
+These are not how the cube works, but are rules for describing how to derive new theorems in the system
+The aim of this system should be to find algorithms that change two or three squares, preferably
+
+## 1
+
+Any single value can be added to the inner-most area of the context
+
+    F
+     D
+     D'
+    F'
+
+May become
+    
+    F
+     D
+      U
+     D'
+    F'
+
+Later
+
+    F
+     D
+      U
+      U'
+     D'
+    F'
+
+And again
+
+    F
+     D
+      U
+       F
+      U'
+     D'
+    F'
+
+## 2
+
+Any contextual value can be removed, or switched, anywhere
+
+This:
+    
+    F
+     D
+      U
+     D'
+    F'
+
+Can become:
+
+    D
+     F
+      U
+     F'
+    D'
+
+By combining these rules outside the system, you can effectively add context of any kind
+whereever you like. This makes it simple to step outside the system and create algorithms in an efficient way
+
+## 3
+
+Any set of well-formed contexts may be duplicated
+
+This:
+    
+    F
+     D
+      U
+     D'
+    F'
+
+Can become:
+
+    F
+     D
+      U
+     D'
+    F'
+    F
+     D
+      U
+     D'
+    F'
+
+Due to observation `# 4`, this can now become
+
+    F
+     D
+      U
+      U
+     D'
+    F'
+
