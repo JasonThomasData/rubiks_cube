@@ -1,0 +1,15 @@
+#content {
+    min-width: 500px;
+    margin: 0 auto;
+}
+
+#content * {
+    width: 100%;
+    display: block;
+    margin: 5 10;
+}
+
+#content p input {
+    width: 0%;
+    display: inline-block;
+}
