@@ -31,12 +31,27 @@ My algorithms are:
     F
      R’
     F’
+
     L
-     F
-      R
-     F’
+    
+    F
+     R
+    F’
+    
     L’
 
 ![front](http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&pzl=3&alg=FR%27F%27LFRF%27L%27&r=y45x-34)
 ![back](http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&pzl=3&alg=FR%27F%27LFRF%27L%27&r=y225x-34)
 
+    #Two corners and two sides (ufl -> rfu) (ul -> ru)
+    L' F' L
+     U
+    L' F L
+
+    U U
+
+    L F' L'
+     U
+    L F L'
+
+    U
