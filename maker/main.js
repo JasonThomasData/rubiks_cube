@@ -1,72 +1,82 @@
 var screenHeight = window.screen.availHeight * 0.66;
 var cube = TTk.AlgorithmPuzzle(3);
-var cumulativeSeedAlgorithm = "";
-var sides = ["F", "B", "U", "D", "R", "L"]
+var cubeMoveHistory = [];
+var userInputAlgorithm = [];
+var sides = ["F", "B", "U", "D", "R", "L", "F'", "B'", "U'", "D'", "R'", "L'"]
 
 function getRandomSide() {
     return sides[Math.floor(Math.random() * sides.length)];
 }
 
-function getInverse() {
-    var inverseChance = Math.round(Math.random());
-    if (inverseChance == 1) {
-        return "'";
-    }
-    return ""
-}
-
 function getRandomMove() {
     var randomSide = getRandomSide();
-    var inverse = getInverse();
-    return randomSide + inverse;
+    return randomSide;
 }
 
 function getNewRandomAlgorithm(numberOfTurns) {
-    var algorithm = " ";
+    var algorithm = [];
     for(var i = 0; i < numberOfTurns; i++) {
         var move = getRandomMove();
-        algorithm = algorithm + move + " ";
+        algorithm.push(move);
     }
     return algorithm;
 }
 
 function makeNewAlgorithm(algorithm) {
-    return cumulativeSeedAlgorithm + algorithm;
+    return cubeMoveHistory.concat(algorithm);
 }
 
 function randomiseCube(numberOfTurns) {
     var algorithm = getNewRandomAlgorithm(+numberOfTurns);
-    cumulativeSeedAlgorithm = makeNewAlgorithm(algorithm);
+    cubeMoveHistory = makeNewAlgorithm(algorithm);
 }
 
-function drawCube(userAlgorithm) {
-    var algorithm = makeNewAlgorithm(userAlgorithm);
-    var showAlgorithm = document.getElementById("show_algorithm").checked;
+function removeInvalidInputs(userInputAlgorithm) {
+    return userInputAlgorithm.filter(elem => sides.includes(elem));
+}
+
+function drawCube(algorithm) {
     document.getElementById("cube_viz").innerHTML = "";
-    cube.showAlg(showAlgorithm)
+
+    cube.showAlg(false)
+        .controls(false)
         .size({width:screenHeight, height:screenHeight})
         .alg(algorithm)
         ('#cube_viz');
-    cube.moveInteract()
-        .mouse(false)
-        .rotate(true);
+
+    cube.moveTo(cubeMoveHistory.length);
+    if(userInputAlgorithm.length > 0) {
+        cube.play();
+    }
 }
 
 document.getElementById("read").onclick = function() {
-    var userAlgorithm = document.getElementById("algorithm").value;
-    drawCube(userAlgorithm);
+    var userAlgorithmString = document.getElementById("algorithm").value.trim();
+    userInputAlgorithm = userAlgorithmString.replace(/\n/g," ").split(" ");
+    userInputAlgorithm = removeInvalidInputs(userInputAlgorithm);
+    var algorithmForDisplay = cubeMoveHistory.join(" ") + " " + userInputAlgorithm.join(" ");
+    drawCube(algorithmForDisplay);
+}
+
+document.getElementById("clear").onclick = function() {
+    document.getElementById("algorithm").value = "";
+    userInputAlgorithm = [];
+}
+
+document.getElementById("commit").onclick = function() {
+    cubeMoveHistory = makeNewAlgorithm(userInputAlgorithm);
 }
 
 var randomiseButtons = document.getElementsByClassName("randomise");
 Array.from(randomiseButtons).forEach(function(button) {
     button.onclick = function() {
-        var turns = button.value;
+        var turns = +button.value;
         randomiseCube(turns);
-        drawCube("");
+        drawCube(cubeMoveHistory.join(" "));
     }
 })
 
 document.getElementById("reset").onclick = function() {
-    cumulativeSeedAlgorithm = ""
-    drawCube("");
+    cubeMoveHistory = [] 
+    drawCube(cubeMoveHistory);
 }

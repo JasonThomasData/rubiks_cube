@@ -10,6 +10,6 @@
 }
 
 #content p input {
-    width: 0%;
+    width: 20px;
     display: inline-block;
 }
