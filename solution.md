@@ -16,7 +16,8 @@ Using a value and then applying its opposite, or conjugate, is a mathematical wa
 
 My algorithms are:
 
-    #Three cycle of edges (fl -> bl -> br)
+#### Three cycle of edges (fl -> bl -> br)
+
     D’
      U
       B2
@@ -27,7 +28,8 @@ My algorithms are:
 ![front](http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&pzl=3&alg=D%27UB2U%27DL2&r=y45x-34)
 ![back](http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&pzl=3&alg=D%27UB2U%27DL2&r=y225x-34)
 
-    #Three  cycle of corners (ufl -> bul -> rub)
+#### Three  cycle of corners (ufl -> bul -> rub)
+
     F
      R’
     F’
@@ -43,7 +45,8 @@ My algorithms are:
 ![front](http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&pzl=3&alg=FR%27F%27LFRF%27L%27&r=y45x-34)
 ![back](http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&pzl=3&alg=FR%27F%27LFRF%27L%27&r=y225x-34)
 
-    #Two corners and two sides (ufl -> rfu) (ul -> ru)
+#### Two corners and two sides (ufl -> rfu) (ul -> ru)
+
     L' F' L
      U
     L' F L
@@ -55,3 +58,6 @@ My algorithms are:
     L F L'
 
     U
+
+![front](http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&pzl=3&alg=L%27F%27LUL%27FLUULF%27L%27ULFL%27U&r=y45x-34)
+![back](http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&pzl=3&alg=L%27F%27LUL%27FLUULF%27L%27ULFL%27U&r=y225x-34)
